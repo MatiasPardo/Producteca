@@ -3,7 +3,6 @@ package com.producteca.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.ValidationException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -82,7 +81,7 @@ public class Product {
 		if(response.contains(product.sku))
 			return new Gson().fromJson(response, Product.class).getId();
 		else
-			throw new ValidationException("Error al crear producto con SKU: " + product.getSku() + "\n" + response);
+			throw new Exception("Error al crear producto con SKU: " + product.getSku() + "\n" + response);
 	}
 	
 	public Boolean update(Producteca producteca, Product product) throws Exception {		

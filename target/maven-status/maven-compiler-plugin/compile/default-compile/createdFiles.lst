@@ -1,0 +1,7 @@
+com\producteca\model\Price.class
+com\producteca\model\Stock.class
+com\producteca\model\Producteca.class
+com\producteca\model\Main.class
+com\producteca\model\Product.class
+com\producteca\model\Line.class
+com\producteca\model\SaleOrder.class
