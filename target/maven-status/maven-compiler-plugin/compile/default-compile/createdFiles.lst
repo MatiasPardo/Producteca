@@ -1,7 +1,11 @@
 com\producteca\model\Price.class
+com\producteca\model\Attribute.class
 com\producteca\model\Stock.class
 com\producteca\model\Producteca.class
+com\producteca\model\Variation.class
 com\producteca\model\Main.class
 com\producteca\model\Product.class
+com\producteca\model\ShippingAddress.class
 com\producteca\model\Line.class
 com\producteca\model\SaleOrder.class
+com\producteca\model\Payment.class

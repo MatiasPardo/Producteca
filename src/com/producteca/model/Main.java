@@ -1,6 +1,6 @@
 package com.producteca.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +15,8 @@ public class Main {
 		
 		Product product = new Product();
 		product.setSku("1");
-		//product.setName("Vino Malbecc");
+//		product.setId("167576362"); 
+		product.setName("Vino Malbecc");
 		
 		List<Stock> stocks = new LinkedList<Stock>();
 		Stock stock = new Stock();
@@ -26,13 +27,13 @@ public class Main {
 		
 		List<Price> prices = new LinkedList<Price>();
 		Price retailPrice = new Price();
-		retailPrice.setAmount(850);
+		retailPrice.setAmount(new BigDecimal(850));
 		retailPrice.setCurrency("Local");
 		retailPrice.setPriceList("Default");
 		prices.add(retailPrice);
 		
 		Price price = new Price();
-		price.setAmount(750);
+		price.setAmount(new BigDecimal(750));
 		price.setCurrency("Local");
 		price.setPriceList("Mayorista");
 		prices.add(price);
@@ -48,18 +49,25 @@ public class Main {
 		//heinkis
 		//Date currentDate = new Date();
 		
-//		LinkedList<SaleOrder> orders = SaleOrder.getSaleOrders(producteca, "2022-08-28T21:27:50Z");
-//		for(SaleOrder order : orders) {
-//			System.out.println("Orden: " + order.getId() + " - Fecha: " +  order.getDate() + " - Total: " + order.getAmount());
-//			System.out.println("Lineas:");
-//			for(Line line : order.getLines()) {
-//				System.out.println(line.getProduct().getName());
-//				System.out.println(line.getQuantity());
-//				System.out.println(line.getPrice());
-//				System.out.println("==========================");
-//			}
-//			System.out.println();
-//		}
+		LinkedList<SaleOrder> orders = SaleOrder.getSaleOrders(producteca, "2022-08-28");
+		for(SaleOrder order : orders) {
+			System.out.println("Orden: " + order.getId() + " - Fecha: " +  order.getDate() + " - Total: " + order.getAmount());
+			System.out.println("Lineas:");
+			for(Line line : order.getLines()) {
+				System.out.println(line.getProduct().getName());
+				System.out.println(line.getQuantity());
+				System.out.println(line.getPrice());
+				System.out.println("==========================");
+			}
+			System.out.println();
+		}
+		if(orders.size() == 0) {
+			System.out.println("==========================");
+			System.out.println("No se encontraron pedidos");
+			System.out.println("==========================");
+
+
+		}
 		
 	}
 }

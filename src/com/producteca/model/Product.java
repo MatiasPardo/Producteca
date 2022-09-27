@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import okhttp3.MediaType;
@@ -17,7 +18,7 @@ public class Product {
 	private String id;
 	private String sku;
 	private String name;
-	private String barcode;
+	private String brand;
 	private String category;
 	
 	private List<Stock> stock;
@@ -98,9 +99,13 @@ public class Product {
 		String response = producteca.sendRequest(request);
 		JsonArray jsonAux = new Gson().fromJson(response, JsonArray.class);
 		Boolean responseOk = Boolean.FALSE;
-		JsonObject jsonResponse = jsonAux.iterator().next().getAsJsonObject().get("product").getAsJsonObject();
-		if(jsonResponse.get("updated") != null && !jsonResponse.get("updated").isJsonNull())
-			responseOk = jsonResponse.get("updated").getAsJsonPrimitive().getAsBoolean();
+		try{
+			JsonElement jsonElemResponse = jsonAux.iterator().next().getAsJsonObject().get("product");
+			if(jsonElemResponse != null && !jsonElemResponse.isJsonNull())
+				responseOk = jsonElemResponse.getAsJsonObject().get("updated").getAsJsonPrimitive().getAsBoolean();
+		}catch(Exception e){
+		}
+
 		return responseOk;
 	}
 
@@ -129,12 +134,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getBarcode() {
-		return barcode;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getCategory() {

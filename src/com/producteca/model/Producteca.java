@@ -1,8 +1,10 @@
 package com.producteca.model;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class Producteca {
 	private String bearer;
@@ -18,13 +20,25 @@ public class Producteca {
 	public String sendRequest(Request request) throws Exception {
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
 		Response response = null;
+		ResponseBody body = null;
 		String responseString = "";
-		
-		response = client.newCall(request).execute();
-		responseString = response.body().string();
-		if(!response.isSuccessful()) {
-			throw new Exception("Error " + response.code() + " API Producteca: " + responseString);
+		Call newCall = null;
+		try{
+			newCall = client.newCall(request);
+			response = newCall.execute();
+			body = response.body();
+			responseString = body.string();
+			if(!response.isSuccessful()) {
+				throw new Exception("Error " + response.code() + " API Producteca: " + responseString);
+			}
+		}finally{
+			if(response != null)
+				response.close();
+			
+			if(body != null)
+				response.close();
 		}
+		
 		
 		return responseString;
 	}

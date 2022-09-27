@@ -1,14 +1,16 @@
 package com.producteca.model;
 
+import java.math.BigDecimal;
+
 public class Price {
-	private Integer amount;
+	private BigDecimal amount;
 	private String currency;
 	private String priceList;
 	
-	public Integer getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(Integer amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	public String getCurrency() {
