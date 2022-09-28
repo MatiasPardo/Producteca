@@ -24,13 +24,14 @@ public class SaleOrder {
 	private String orderId;
 	private String contactPerson;
 	private String contactName;
+	private Date updatedAt;
 	
 	
 	public static LinkedList<SaleOrder> getSaleOrders(Producteca producteca, String date) throws Exception {
 		//Date format: yyyy-MM-dd
 		Request request = new Request.Builder()
 				  .url(producteca.getUrl() + "/search/salesorders?$filter= ((paymentStatus eq 'Approved') and"
-						  + "(date gt " + date + "T00:00:00z" + "))")
+						  + "(updatedAt gt " + date + "T00:00:00z" + "))")
 				  .method("GET", null)
 				  .addHeader("x-api-key", producteca.getApiKey())
 				  .addHeader("Authorization", "Bearer " + producteca.getBearer())
@@ -153,6 +154,14 @@ public class SaleOrder {
 
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

@@ -51,7 +51,7 @@ public class Main {
 		
 		LinkedList<SaleOrder> orders = SaleOrder.getSaleOrders(producteca, "2022-08-28");
 		for(SaleOrder order : orders) {
-			System.out.println("Orden: " + order.getId() + " - Fecha: " +  order.getDate() + " - Total: " + order.getAmount());
+			System.out.println("Orden: " + order.getId() + " - Fecha: " +  order.getUpdatedAt() + " - Total: " + order.getAmount());
 			System.out.println("Lineas:");
 			for(Line line : order.getLines()) {
 				System.out.println(line.getProduct().getName());
