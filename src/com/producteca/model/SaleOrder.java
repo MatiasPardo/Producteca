@@ -59,6 +59,38 @@ public class SaleOrder {
 		
 		return orders;
 	}
+	
+	public static LinkedList<SaleOrder> getSaleOrdersAllAfter(Producteca producteca, String date) throws Exception {
+		//Date format: yyyy-MM-dd
+		Request request = new Request.Builder()
+				  .url(producteca.getUrl() + "/search/salesorders?$filter= updatedAt gt " + date + "T00:00:00z")
+				  .method("GET", null)
+				  .addHeader("x-api-key", producteca.getApiKey())
+				  .addHeader("Authorization", "Bearer " + producteca.getBearer())
+				  .addHeader("Content-Type", "application/json")
+				  .build();
+		
+		String response = producteca.sendRequest(request);
+		LinkedList<SaleOrder> orders = new LinkedList<SaleOrder>();
+		JsonElement jsonElement = new Gson().fromJson(response, JsonElement.class);
+		JsonArray jsonArray = new JsonArray();
+		try{
+			if(jsonElement.isJsonObject()){
+				jsonArray = jsonElement.getAsJsonObject().get("results").getAsJsonArray();
+			}
+			if(jsonArray != null && !jsonArray.isJsonNull()){
+				for(JsonElement element : jsonArray){
+					SaleOrder order = new Gson().fromJson(element, SaleOrder.class);
+					orders.add(order);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+		
+		return orders;
+	}
 
 	public String getId() {
 		return id;

@@ -49,9 +49,9 @@ public class Main {
 		//heinkis
 		//Date currentDate = new Date();
 		
-		LinkedList<SaleOrder> orders = SaleOrder.getSaleOrders(producteca, "2022-08-28");
+		LinkedList<SaleOrder> orders = SaleOrder.getSaleOrdersAllAfter(producteca, "2022-08-28");
 		for(SaleOrder order : orders) {
-			System.out.println("Orden: " + order.getId() + " - Fecha: " +  order.getUpdatedAt() + " - Total: " + order.getAmount());
+			System.out.println("Orden: " + order.getId() + " - Estado de pago: " +  order.getPaymentStatus() + " - Estado: " +  order.getStatus() + " - Total: " + order.getAmount());
 			System.out.println("Lineas:");
 			for(Line line : order.getLines()) {
 				System.out.println(line.getProduct().getName());
