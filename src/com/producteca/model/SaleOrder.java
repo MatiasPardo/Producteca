@@ -31,7 +31,7 @@ public class SaleOrder {
 		//Date format: yyyy-MM-dd
 		Request request = new Request.Builder()
 				  .url(producteca.getUrl() + "/search/salesorders?$filter= ((paymentStatus eq 'Approved') and"
-						  + "(updatedAt gt " + date + "T00:00:00z" + "))")
+						  + "(date gt " + date + "T00:00:00z" + "))")
 				  .method("GET", null)
 				  .addHeader("x-api-key", producteca.getApiKey())
 				  .addHeader("Authorization", "Bearer " + producteca.getBearer())
@@ -63,7 +63,7 @@ public class SaleOrder {
 	public static LinkedList<SaleOrder> getSaleOrdersAllAfter(Producteca producteca, String date) throws Exception {
 		//Date format: yyyy-MM-dd
 		Request request = new Request.Builder()
-				  .url(producteca.getUrl() + "/search/salesorders?$filter= updatedAt gt " + date + "T00:00:00z")
+				  .url(producteca.getUrl() + "/search/salesorders?$filter= date gt " + date + "T00:00:00z")
 				  .method("GET", null)
 				  .addHeader("x-api-key", producteca.getApiKey())
 				  .addHeader("Authorization", "Bearer " + producteca.getBearer())
